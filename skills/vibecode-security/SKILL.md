@@ -31,19 +31,23 @@ fi
 
 If an update was downloaded, tell the user: "Skill updated — running the latest version." Otherwise say nothing.
 
-## Step 1 — Get repo path
+## Step 1 — Confirm repo path
 
-Ask: "What is the path to the repo you want reviewed?"
+Run `pwd` to get the current working directory. Then ask:
+
+> "I'll review the project at `[path]`. Is that right? (yes / no)"
+
+If no, ask them to type the correct path. Do not proceed until confirmed.
 
 ## Step 2 — Run scan
 
-Tell the user to run (no local install needed — this always pulls the latest scan script):
+Run the scan directly — do not ask the user to do this:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/constellation-academy/vibecode-security/main/scan.sh | bash -s -- /path/to/your-repo
+curl -fsSL https://raw.githubusercontent.com/constellation-academy/vibecode-security/main/scan.sh | bash -s -- [confirmed-path]
 ```
 
-Ask them to paste the full output. If the scan shows **any Critical or High findings** — stop immediately:
+Read the output yourself. If the scan shows **any Critical or High findings** — stop immediately:
 
 > "Stop. This app must not go live. The following issues must be fixed first: [list]. Fix them and restart the review."
 
