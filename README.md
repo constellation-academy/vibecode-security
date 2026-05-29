@@ -8,7 +8,7 @@ A Claude Code skill that blocks unsafe vibe-coded apps from going live. It runs 
 
 ## Install
 
-### Mac / Linux — Claude Code CLI or VS Code
+### Mac / Linux
 
 Paste this into your terminal:
 
@@ -20,7 +20,7 @@ Then **restart Claude Code** (quit and reopen).
 
 ---
 
-### Windows — Claude Code CLI or VS Code
+### Windows
 
 Paste this into PowerShell:
 
@@ -44,14 +44,6 @@ Then **restart Claude Code** (quit and reopen).
 
 ---
 
-### VS Code
-
-1. Open the integrated terminal in VS Code (`Ctrl+`` ` / `Cmd+`` `)
-2. Run the install command for your OS (see Mac/Linux or Windows above)
-3. **Restart VS Code** — the skill is picked up on next launch
-
----
-
 ## Usage
 
 In any Claude Code session, say:
@@ -66,12 +58,12 @@ The skill will ask for your repo path, run the scan, review your code, and issue
 
 **Mac / Linux:**
 ```bash
-bash ~/vibecode-security/scan.sh /path/to/your-repo
+curl -fsSL https://raw.githubusercontent.com/constellation-academy/vibecode-security/main/scan.sh | bash -s -- /path/to/your-repo
 ```
 
 **Windows (Git Bash or WSL):**
 ```bash
-bash ~/vibecode-security/scan.sh /path/to/your-repo
+curl -fsSL https://raw.githubusercontent.com/constellation-academy/vibecode-security/main/scan.sh | bash -s -- /path/to/your-repo
 ```
 
 Fix all findings, re-run until clean, then trigger the full Claude Code review.
@@ -80,16 +72,13 @@ Fix all findings, re-run until clean, then trigger the full Claude Code review.
 
 ## Updating
 
-The skill auto-updates on Mac/Linux every time it runs (it pulls the latest version silently).
-
-On Windows, re-run the PowerShell install command to get the latest version.
+The skill auto-updates every time it runs (pulls the latest version silently).
 
 ---
 
 ## Requirements
 
-- Claude Code (CLI, VS Code extension, or Desktop app)
-- bash + git (Mac/Linux; Windows: Git Bash or WSL for the manual scan)
+- Claude Code (CLI or Desktop app)
 - Node.js + npm (for JS/TS projects)
 - Python + `pip install pip-audit` (for Python projects)
 
