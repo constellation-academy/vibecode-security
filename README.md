@@ -1,44 +1,100 @@
-# Vibecode Security
+# vibecode-security
 
-Security gate for vibecoded apps before going live. Includes a scan script and a Claude Code skill.
+A Claude Code skill that blocks unsafe vibe-coded apps from going live. It runs a secrets scan, an OWASP Top 10 code review, and a GDPR checklist — and issues a hard PASS or FAIL verdict.
 
-## Installation (3 steps)
+**Trigger phrases:** `security check` · `review my app` · `publish my app` · `Freigabe`
 
-**Step 1 — Clone the repo** (einmalig):
+---
+
+## Install
+
+### Mac / Linux — Claude Code CLI or VS Code
+
+Paste this into your terminal:
+
 ```bash
-git clone https://github.com/constellation-academy/vibecode-security ~/vibecode-security
+curl -fsSL https://raw.githubusercontent.com/constellation-academy/vibecode-security/main/install.sh | bash
 ```
 
-**Step 2 — Run the install script**:
-```bash
-bash ~/vibecode-security/install.sh
+Then **restart Claude Code** (quit and reopen).
+
+---
+
+### Windows — Claude Code CLI or VS Code
+
+Paste this into PowerShell:
+
+```powershell
+irm https://raw.githubusercontent.com/constellation-academy/vibecode-security/main/install.ps1 | iex
 ```
 
-**Step 3 — Restart Claude Code** (komplett schließen und neu öffnen).
+Then **restart Claude Code** (quit and reopen).
 
-Done. Trigger it by saying: **"Freigabe"**, **"security check"**, or **"ich will meine App veröffentlichen"**.
+---
+
+### Claude Code Desktop (Mac)
+
+1. Open Claude Code Desktop
+2. Open a terminal window inside the app (`Ctrl+`` ` or via the menu)
+3. Paste the Mac install command:
+   ```bash
+   curl -fsSL https://raw.githubusercontent.com/constellation-academy/vibecode-security/main/install.sh | bash
+   ```
+4. **Quit and reopen** Claude Code Desktop
+
+---
+
+### VS Code
+
+1. Open the integrated terminal in VS Code (`Ctrl+`` ` / `Cmd+`` `)
+2. Run the install command for your OS (see Mac/Linux or Windows above)
+3. **Restart VS Code** — the skill is picked up on next launch
+
+---
+
+## Usage
+
+In any Claude Code session, say:
+
+> **"security check"** or **"review my app"** or **"Freigabe"**
+
+The skill will ask for your repo path, run the scan, review your code, and issue a PASS or FAIL verdict.
 
 ---
 
 ## Manual scan (without Claude Code)
 
+**Mac / Linux:**
 ```bash
 bash ~/vibecode-security/scan.sh /path/to/your-repo
 ```
 
-Fix any findings, re-run until clean, then ask a tech reviewer to sign off.
+**Windows (Git Bash or WSL):**
+```bash
+bash ~/vibecode-security/scan.sh /path/to/your-repo
+```
 
-## Requirements
+Fix all findings, re-run until clean, then trigger the full Claude Code review.
 
-- bash
-- git
-- Node.js + npm (for JS projects)
-- Python + `pip install pip-audit` (for Python projects)
+---
 
 ## Updating
 
-```bash
-cd ~/vibecode-security && git pull
-```
+The skill auto-updates on Mac/Linux every time it runs (it pulls the latest version silently).
 
-No reinstall needed — the skill symlinks to the cloned folder.
+On Windows, re-run the PowerShell install command to get the latest version.
+
+---
+
+## Requirements
+
+- Claude Code (CLI, VS Code extension, or Desktop app)
+- bash + git (Mac/Linux; Windows: Git Bash or WSL for the manual scan)
+- Node.js + npm (for JS/TS projects)
+- Python + `pip install pip-audit` (for Python projects)
+
+---
+
+## Author
+
+[Sascha Ringert](https://constellation-academy.com) · [Constellation Academy](https://constellation-academy.com)
