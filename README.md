@@ -4,6 +4,12 @@ A Claude Code skill that reviews vibe-coded apps for security before they go liv
 
 ---
 
+## Before you start
+
+When Claude runs the security scan, it will ask for your permission to execute a script. **Click Allow** — this is expected and required for the scan to work.
+
+---
+
 ## Install — Claude Code Desktop
 
 1. Open Claude Code Desktop
@@ -36,9 +42,6 @@ Then restart Claude Code.
 Say things like **"check my app"**, **"can I go live?"**, **"is this safe to share?"**, **"Freigabe"**, or **"kann ich das veröffentlichen?"** — in English or German.
 
 Claude will confirm the project path, run the scan, review the code, and issue a PASS or FAIL verdict.
-
-> **When Claude asks for permission to run the scan — click Allow.**
-> You'll see a prompt like *"Run script from external URL?"* — this is the security scanner doing its job. Click **Allow** to continue. Without it, the scan cannot run.
 
 ---
 
