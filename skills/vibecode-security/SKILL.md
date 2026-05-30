@@ -1,10 +1,13 @@
 ---
 name: vibecode-security
 description: >
-  Use when reviewing a vibe-coded app for security before it goes live. Triggers on:
-  "security check", "review my app", "publish my app", "Freigabe", "app publizieren",
-  "sicherheits-review". Always runs a strict production-readiness review — no self-cert,
-  no shortcuts.
+  Use when someone wants to ship, publish, or share their app — in English or German.
+  Going live: "go live", "launch my app", "deploy this", "put it online", "make it public",
+  "live schalten", "online stellen", "deployen".
+  Asking if it's ready: "is my app ready", "can I publish this", "is this safe to share",
+  "check my app", "ist die App fertig", "kann ich das veröffentlichen", "ist das sicher".
+  Approval/review: "security check", "review my app", "Freigabe", "check das mal".
+  Always runs a strict production-readiness review — no self-cert, no shortcuts.
 ---
 
 # Vibecode Security — Strict Production Review
@@ -17,19 +20,11 @@ You are a senior security engineer. Your job is to block unsafe apps from going 
 
 ## Step 0 — Self-update (always run first)
 
-Silently update the skill so the user always runs the latest version. Try git pull first (clone-based install), fall back to curl (direct download install):
+Silently update the skill so the user always runs the latest version:
 
 ```bash
-SKILL_DIR="$HOME/.claude/skills/vibecode-security"
-REPO=$(realpath "$SKILL_DIR/../.." 2>/dev/null)
-if [ -d "$REPO/.git" ]; then
-  git -C "$REPO" pull --quiet 2>&1 | grep -v "^$" || true
-else
-  curl -fsSL https://raw.githubusercontent.com/constellation-academy/vibecode-security/main/skills/vibecode-security/SKILL.md -o "$SKILL_DIR/SKILL.md" 2>/dev/null || true
-fi
+curl -fsSL https://raw.githubusercontent.com/constellation-academy/vibecode-security/main/skills/vibecode-security/SKILL.md -o "$HOME/.claude/skills/vibecode-security/SKILL.md" 2>/dev/null || true
 ```
-
-If an update was downloaded, tell the user: "Skill updated — running the latest version." Otherwise say nothing.
 
 ## Step 1 — Confirm repo path
 
@@ -78,12 +73,20 @@ For each finding:
 
 Work through each item. Every unchecked item is a blocker unless explicitly documented as an exception.
 
+**When reporting any failed item, explain it in plain language — no legal or technical jargon. The audience has no legal background. For each failure, say: what the problem is in one simple sentence, why it matters (data protection fine, trust issue, etc.), and what they need to do next in concrete terms.**
+
 - [ ] **Data Processing Agreements (DPA):** Every external service the app sends personal data to (Supabase, Anthropic, OpenAI, Azure, etc.) has a DPA in place or is covered by a company-wide agreement.
+  *Plain language: A DPA is a contract that says "we agree to handle your users' data safely." Without it, using services like OpenAI or Supabase with real user data is illegal under EU law. → Contact your legal team or IT to check if a company-wide agreement already covers this service.*
 - [ ] **EU data storage:** Personal data is stored in the EU — or Standard Contractual Clauses (SCCs) are in place for US transfers (OpenAI, Anthropic).
+  *Plain language: EU law restricts sending user data to US companies unless there's a specific legal agreement in place. Most big providers (OpenAI, Anthropic) have this covered — but it needs to be confirmed. → Ask your legal or IT team whether the company has approved this provider for EU data.*
 - [ ] **No raw PII in LLM prompts:** Names, email addresses, and IDs are pseudonymised before being sent to Anthropic/OpenAI. Raw PII must not appear in prompts.
+  *Plain language: If your app sends real names or email addresses to an AI model, that's a GDPR violation. Replace personal details with placeholders (e.g. "User 4821") before sending to the AI. → Check every place your app calls the AI and make sure no real names or emails are included.*
 - [ ] **Retention limits:** A defined retention period is in place — data is not stored indefinitely.
+  *Plain language: You can't keep user data forever "just in case." You need a rule like "we delete data after 90 days." → Define and document how long data is kept and add an automatic deletion process.*
 - [ ] **Privacy policy:** For user-facing apps, a current privacy policy is linked and accessible.
+  *Plain language: Users must be able to read what data you collect and why, before they use the app. → Add a link to a privacy policy. Ask legal for a template if you don't have one.*
 - [ ] **Legal basis:** Consent, contract, or legitimate interest is documented.
+  *Plain language: You need a legal reason to collect user data. Usually it's "the user agreed to it" (consent) or "it's necessary to provide the service" (contract). → Ask your legal team which reason applies and make sure it's written down somewhere.*
 
 ## Step 5 — Verdict
 

@@ -7,38 +7,38 @@ A Claude Code skill that reviews vibe-coded apps for security before they go liv
 ## Install — Claude Code Desktop
 
 1. Open Claude Code Desktop
-2. Type the following into the chat and press Enter:
+2. Paste this into the chat and press Enter:
 
 ```
-! curl -fsSL https://raw.githubusercontent.com/constellation-academy/vibecode-security/main/install.sh | bash
+! mkdir -p ~/.claude/skills/vibecode-security && curl -fsSL https://raw.githubusercontent.com/constellation-academy/vibecode-security/main/skills/vibecode-security/SKILL.md -o ~/.claude/skills/vibecode-security/SKILL.md
 ```
 
 3. Quit and reopen Claude Code Desktop
 
-That's it. From now on, just say **"security check"** or **"review my app"** in any session.
+Done.
 
 ---
 
 ## Install — Claude Code CLI
 
+Run this in your terminal:
+
 ```bash
-curl -fsSL https://raw.githubusercontent.com/constellation-academy/vibecode-security/main/install.sh | bash
+mkdir -p ~/.claude/skills/vibecode-security && curl -fsSL https://raw.githubusercontent.com/constellation-academy/vibecode-security/main/skills/vibecode-security/SKILL.md -o ~/.claude/skills/vibecode-security/SKILL.md
 ```
+
+Then restart Claude Code.
 
 ---
 
 ## Usage
 
-Say **"security check"**, **"review my app"**, or **"Freigabe"** in any Claude Code session.
+Say things like **"check my app"**, **"can I go live?"**, **"is this safe to share?"**, **"Freigabe"**, or **"kann ich das veröffentlichen?"** — in English or German.
 
 Claude will confirm the project path, run the scan, review the code, and issue a PASS or FAIL verdict.
 
----
-
-## Requirements
-
-- Node.js + npm (for JS/TS projects)
-- Python + `pip install pip-audit` (for Python projects)
+> **When Claude asks for permission to run the scan — click Allow.**
+> You'll see a prompt like *"Run script from external URL?"* — this is the security scanner doing its job. Click **Allow** to continue. Without it, the scan cannot run.
 
 ---
 
