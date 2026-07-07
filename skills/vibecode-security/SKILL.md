@@ -42,6 +42,12 @@ Run the scan directly — do not ask the user to do this:
 curl -fsSL https://raw.githubusercontent.com/constellation-academy/vibecode-security/main/scan.sh | bash -s -- [confirmed-path]
 ```
 
+**Verify the scan actually ran.** A clean scan always prints the banner (`Vibecode Security Scan`), a section for each check, and a `Scan Complete` summary line. If the output is empty, truncated, or missing the summary — the download or execution failed (network, proxy, rate-limit). **Do not treat missing output as a pass.** Say so and retry once:
+
+> "The scan didn't return results — the script may have failed to download. Retrying."
+
+If it fails again, stop and tell the user the scan could not run. An unverified app never passes.
+
 Read the output yourself. If the scan shows **any Critical or High findings** — stop immediately:
 
 > "Stop. This app must not go live. The following issues must be fixed first: [list]. Fix them and restart the review."
@@ -67,13 +73,22 @@ For each finding:
 - Rate severity: **critical / high / medium / low**
 - Show the exact code fix
 
-**Authentication is a hard gate.** If the app has no login system, or if any page/endpoint is reachable without authentication: immediate FAIL. No exceptions.
+**Authentication is a hard gate.** Assume every app reviewed here is **fully internet-facing** — there is no VPN, no private network, and no server perimeter to hide behind. Anyone on the internet can reach every route. So every page/endpoint that exposes data or actions must require an authenticated user, enforced by the app itself.
+
+Authentication counts when it is enforced **in the app** (next-auth, Clerk, Auth0, Supabase Auth, Flask-Login, etc.) **or by a hosted access gate** the app sits behind (Cloudflare Access, Netlify Identity). If a hosted gate is claimed, the user must confirm it is actually configured and enforced for this deployment — an unconfigured claim does not count. "It's not linked anywhere" or "nobody knows the URL" is **not** authentication — the app is public.
+
+If there is no auth in the code **and** no confirmed hosted gate, or if any data-exposing route is reachable without a login: immediate FAIL.
+
+Public-by-design pages (a marketing landing page, a public health check) are fine — but anything that reads, writes, or reveals user or business data is not.
 
 ## Step 4 — GDPR Checklist
 
-Work through each item. Every unchecked item is a blocker unless explicitly documented as an exception.
+GDPR items fall into two kinds. Treat them differently — this is what makes the verdict honest and actionable instead of a blanket "no DPA → FAIL" for every app.
 
-**When reporting any failed item, explain it in plain language — no legal or technical jargon. The audience has no legal background. For each failure, say: what the problem is in one simple sentence, why it matters (data protection fine, trust issue, etc.), and what they need to do next in concrete terms.**
+- **Code-verifiable (hard gate):** you can confirm or refute this by reading the source. Judge it yourself. A violation is a blocker. → *No raw PII in LLM prompts* is the main one.
+- **Org/legal (must-confirm):** you cannot tell from the code alone (a DPA is a signed contract, a legal basis is a decision, a privacy policy may live outside the repo). **Do not auto-FAIL these and do not silently pass them.** For each, ask the user directly: "Can you confirm [item] is in place? (yes / no / don't know)". Only a clear "yes" clears it. "No" or "don't know" leaves it **unconfirmed** — which blocks a full PASS but is reported as *"confirm before launch"*, not as *"your code is broken"*.
+
+**When reporting any failed or unconfirmed item, explain it in plain language — no legal or technical jargon. The audience has no legal background. For each, say: what it means in one simple sentence, why it matters (data protection fine, trust issue, etc.), and what to do next in concrete terms.**
 
 - [ ] **Data Processing Agreements (DPA):** Every external service the app sends personal data to (Supabase, Anthropic, OpenAI, Azure, etc.) has a DPA in place or is covered by a company-wide agreement.
   *Plain language: A DPA is a contract that says "we agree to handle your users' data safely." Without it, using services like OpenAI or Supabase with real user data is illegal under EU law. → Contact your legal team or IT to check if a company-wide agreement already covers this service.*
@@ -90,10 +105,15 @@ Work through each item. Every unchecked item is a blocker unless explicitly docu
 
 ## Step 5 — Verdict
 
-Issue exactly one of two verdicts. No hedging.
+Issue exactly one verdict. No hedging. A PASS requires the scan clean, no OWASP findings, every code-verifiable GDPR gate satisfied, **and** every org/legal item confirmed "yes" by the user.
 
-**PASS:**
-> "Approved for launch. Scan clean, no OWASP findings, GDPR checklist complete. ✓"
+**PASS** (all of the above):
+> "Approved for launch. Scan clean, no OWASP findings, GDPR checklist complete and confirmed. ✓"
 
-**FAIL** (any finding at any severity, or any unchecked GDPR item):
-> "Not approved for launch. The following issues must be resolved: [list]. Restart the review once they are fixed."
+**FAIL — must fix** (any scan finding, any OWASP finding, or any code-verifiable GDPR violation):
+> "Not approved for launch. These are broken and must be fixed: [list]. Restart the review once they are fixed."
+
+**FAIL — must confirm** (code is clean but one or more org/legal GDPR items are unconfirmed):
+> "Not approved yet. The code is clean, but launch is blocked until you confirm the following with your team: [list]. These aren't code problems — they're things I can't verify from the source. Come back once they're confirmed."
+
+If both apply, report both lists. Never issue a PASS while anything is unconfirmed.
