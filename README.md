@@ -19,14 +19,14 @@ This is the easiest way and keeps the skill up to date automatically. Works in *
 Paste these two lines into the Claude Code prompt, one after the other:
 
 ```
-/plugin marketplace add constellation-academy/vibecode-security
+/plugin marketplace add https://github.com/constellation-academy/vibecode-security.git
 ```
 
 ```
 /plugin install vibecode-security@constellation-academy
 ```
 
-Then restart Claude Code. Done.
+Then restart Claude Code. Done. (You only need **git** installed — the HTTPS link above clones anonymously, so no GitHub account or SSH keys are required.)
 
 **Prefer clicking?** On Desktop, after the first command you can also install from the UI: click the **+** button next to the prompt box → **Plugins** → **Add plugin**, then pick **vibecode-security** from the browser.
 
@@ -51,6 +51,12 @@ mkdir -p ~/.claude/skills/vibecode-security && curl -fsSL https://raw.githubuser
 ```
 
 Then restart Claude Code. (This method self-updates each time you run the skill.)
+
+---
+
+## Check it worked
+
+After restarting, open any project and type **"check my app"** (or **"kann ich das veröffentlichen?"**). Claude should recognise it and offer to run the security review. If it does, you're set.
 
 ---
 
