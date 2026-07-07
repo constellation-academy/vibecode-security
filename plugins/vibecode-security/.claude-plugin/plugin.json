@@ -5,8 +5,8 @@
     "name": "Sascha Ringert",
     "url": "https://constellation-academy.com"
   },
-  "homepage": "https://github.com/constellation-academy/vibecode-security",
-  "repository": "https://github.com/constellation-academy/vibecode-security",
+  "homepage": "https://github.com/constellation-academy/vibecode-agent-skills",
+  "repository": "https://github.com/constellation-academy/vibecode-agent-skills",
   "license": "MIT",
   "keywords": ["security", "dsgvo", "owasp", "vibecode"]
 }

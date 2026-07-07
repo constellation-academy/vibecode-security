@@ -1,18 +1,18 @@
 {
-  "name": "constellation-academy-agent-skills",
+  "name": "vibecode-agent-skills",
   "owner": {
     "name": "Constellation Academy"
   },
-  "description": "Constellation Academy internal Claude Code tools.",
+  "description": "Constellation Academy vibecode agent skills for Claude Code.",
   "plugins": [
     {
       "name": "vibecode-security",
-      "source": "./",
+      "source": "./plugins/vibecode-security",
       "description": "Strict production-readiness security gate for vibecoded apps — secrets scan, OWASP Top 10 review, and GDPR/DSGVO checklist with a hard PASS/FAIL verdict.",
       "category": "security",
       "keywords": ["security", "dsgvo", "owasp", "vibecode"],
-      "homepage": "https://github.com/constellation-academy/vibecode-security",
-      "repository": "https://github.com/constellation-academy/vibecode-security",
+      "homepage": "https://github.com/constellation-academy/vibecode-agent-skills",
+      "repository": "https://github.com/constellation-academy/vibecode-agent-skills",
       "license": "MIT",
       "author": {
         "name": "Sascha Ringert"

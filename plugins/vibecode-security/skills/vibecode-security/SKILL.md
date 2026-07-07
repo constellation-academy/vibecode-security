@@ -23,7 +23,7 @@ You are a senior security engineer. Your job is to block unsafe apps from going 
 Keep the skill current. Plugin installs update themselves from git, so only refresh an **existing** single-file install — never create the file if it isn't there, or a plugin user would end up with a duplicate skill:
 
 ```bash
-[ -f "$HOME/.claude/skills/vibecode-security/SKILL.md" ] && curl -fsSL https://raw.githubusercontent.com/constellation-academy/vibecode-security/main/skills/vibecode-security/SKILL.md -o "$HOME/.claude/skills/vibecode-security/SKILL.md" 2>/dev/null || true
+[ -f "$HOME/.claude/skills/vibecode-security/SKILL.md" ] && curl -fsSL https://raw.githubusercontent.com/constellation-academy/vibecode-agent-skills/main/plugins/vibecode-security/skills/vibecode-security/SKILL.md -o "$HOME/.claude/skills/vibecode-security/SKILL.md" 2>/dev/null || true
 ```
 
 ## Step 1 — Confirm repo path
@@ -39,7 +39,7 @@ If no, ask them to type the correct path. Do not proceed until confirmed.
 Run the scan directly — do not ask the user to do this:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/constellation-academy/vibecode-security/main/scan.sh | bash -s -- [confirmed-path]
+curl -fsSL https://raw.githubusercontent.com/constellation-academy/vibecode-agent-skills/main/plugins/vibecode-security/scan.sh | bash -s -- [confirmed-path]
 ```
 
 **Verify the scan actually ran.** A clean scan always prints the banner (`Vibecode Security Scan`), a section for each check, and a `Scan Complete` summary line. If the output is empty, truncated, or missing the summary — the download or execution failed (network, proxy, rate-limit). **Do not treat missing output as a pass.** Say so and retry once:
