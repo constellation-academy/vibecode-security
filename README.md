@@ -14,7 +14,7 @@ When Claude runs the security scan, it will ask for your permission to execute a
 
 ## Install (recommended) — as a plugin
 
-This is the easiest way and keeps the skill up to date automatically. Works in **Claude Code Desktop and the CLI**.
+This is the easiest way to install and manage the skill. Works in **Claude Code Desktop and the CLI**.
 
 Paste these two lines into the Claude Code prompt, one after the other:
 
@@ -30,7 +30,9 @@ Then restart Claude Code. Done. (You only need **git** installed — the HTTPS l
 
 **Prefer clicking?** On Desktop, after the first command you can also install from the UI: click the **+** button next to the prompt box → **Plugins** → **Add plugin**, then pick **vibecode-security** from the browser.
 
-Updates are automatic — every time we improve the skill, you get the latest version on the next restart. No reinstall needed.
+**Stay on the latest version.** This is a security tool, so you want the newest checks — but third-party plugins don't auto-update by default. Turn it on once: run `/plugin`, open the **Marketplaces** tab, select **constellation-academy-agent-skills**, and choose **Enable auto-update**. After that you get updates automatically at startup, no reinstall.
+
+(Prefer to update by hand? Run `/plugin marketplace update constellation-academy-agent-skills` then `/reload-plugins` whenever you want the latest.)
 
 ---
 
