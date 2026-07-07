@@ -1,6 +1,8 @@
-# vibecode-security
+# vibecode-agent-skills
 
-Before you put an app online, this checks it for security problems and gives you a clear answer: **safe to launch**, or **not yet — and here's what to fix**. It talks in plain language. No tech background needed.
+Constellation Academy's Claude Code skills. Right now it gives you one thing: a **security check** for your app.
+
+Before you put an app online, it checks for security problems and gives you a clear answer: **safe to launch**, or **not yet — and here's what to fix**. It talks in plain language. No tech background needed.
 
 ---
 
