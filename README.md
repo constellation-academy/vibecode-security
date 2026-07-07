@@ -2,6 +2,8 @@
 
 A Claude Code skill that reviews vibe-coded apps for security before they go live. It runs a secrets scan, an OWASP Top 10 code review, and a GDPR checklist — and issues a hard PASS or FAIL verdict.
 
+Every app reviewed is assumed to be **fully internet-facing** (no VPN, no private network), so the review is strict: a PASS is earned, not given.
+
 ---
 
 ## Before you start
@@ -10,30 +12,45 @@ When Claude runs the security scan, it will ask for your permission to execute a
 
 ---
 
-## Install — Claude Code Desktop
+## Install (recommended) — as a plugin
 
-1. Open Claude Code Desktop
-2. Paste this into the chat and press Enter:
+This is the easiest way and keeps the skill up to date automatically. Works in **Claude Code Desktop and the CLI**.
+
+Paste these two lines into the Claude Code prompt, one after the other:
+
+```
+/plugin marketplace add constellation-academy/vibecode-security
+```
+
+```
+/plugin install vibecode-security@constellation-academy
+```
+
+Then restart Claude Code. Done.
+
+**Prefer clicking?** On Desktop, after the first command you can also install from the UI: click the **+** button next to the prompt box → **Plugins** → **Add plugin**, then pick **vibecode-security** from the browser.
+
+Updates are automatic — every time we improve the skill, you get the latest version on the next restart. No reinstall needed.
+
+---
+
+## Install (alternative) — single skill file
+
+If you'd rather not use the plugin system, install just the skill file. Works on Desktop and CLI.
+
+**Desktop:** paste this into the chat and press Enter (the `!` runs it as a command):
 
 ```
 ! mkdir -p ~/.claude/skills/vibecode-security && curl -fsSL https://raw.githubusercontent.com/constellation-academy/vibecode-security/main/skills/vibecode-security/SKILL.md -o ~/.claude/skills/vibecode-security/SKILL.md
 ```
 
-3. Quit and reopen Claude Code Desktop
-
-Done.
-
----
-
-## Install — Claude Code CLI
-
-Run this in your terminal:
+**CLI:** run the same command in your terminal (without the leading `!`):
 
 ```bash
 mkdir -p ~/.claude/skills/vibecode-security && curl -fsSL https://raw.githubusercontent.com/constellation-academy/vibecode-security/main/skills/vibecode-security/SKILL.md -o ~/.claude/skills/vibecode-security/SKILL.md
 ```
 
-Then restart Claude Code.
+Then restart Claude Code. (This method self-updates each time you run the skill.)
 
 ---
 

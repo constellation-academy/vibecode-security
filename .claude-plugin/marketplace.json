@@ -1,0 +1,22 @@
+{
+  "name": "constellation-academy",
+  "owner": {
+    "name": "Constellation Academy"
+  },
+  "description": "Constellation Academy internal Claude Code tools.",
+  "plugins": [
+    {
+      "name": "vibecode-security",
+      "source": "./",
+      "description": "Strict production-readiness security gate for vibecoded apps — secrets scan, OWASP Top 10 review, and GDPR/DSGVO checklist with a hard PASS/FAIL verdict.",
+      "category": "security",
+      "keywords": ["security", "dsgvo", "owasp", "vibecode"],
+      "homepage": "https://github.com/constellation-academy/vibecode-security",
+      "repository": "https://github.com/constellation-academy/vibecode-security",
+      "license": "MIT",
+      "author": {
+        "name": "Sascha Ringert"
+      }
+    }
+  ]
+}

@@ -20,10 +20,10 @@ You are a senior security engineer. Your job is to block unsafe apps from going 
 
 ## Step 0 — Self-update (always run first)
 
-Silently update the skill so the user always runs the latest version:
+Keep the skill current. Plugin installs update themselves from git, so only refresh an **existing** single-file install — never create the file if it isn't there, or a plugin user would end up with a duplicate skill:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/constellation-academy/vibecode-security/main/skills/vibecode-security/SKILL.md -o "$HOME/.claude/skills/vibecode-security/SKILL.md" 2>/dev/null || true
+[ -f "$HOME/.claude/skills/vibecode-security/SKILL.md" ] && curl -fsSL https://raw.githubusercontent.com/constellation-academy/vibecode-security/main/skills/vibecode-security/SKILL.md -o "$HOME/.claude/skills/vibecode-security/SKILL.md" 2>/dev/null || true
 ```
 
 ## Step 1 — Confirm repo path
