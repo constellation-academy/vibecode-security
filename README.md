@@ -23,7 +23,7 @@ Paste these two lines into the Claude Code prompt, one after the other:
 ```
 
 ```
-/plugin install vibecode-security@constellation-academy
+/plugin install vibecode-security@constellation-academy-agent-skills
 ```
 
 Then restart Claude Code. Done. (You only need **git** installed — the HTTPS link above clones anonymously, so no GitHub account or SSH keys are required.)
