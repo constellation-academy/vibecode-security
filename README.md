@@ -6,25 +6,9 @@ Before you put an app online, it checks for security problems and gives you a cl
 
 ---
 
-## Step 1 — Install it (you do this once)
+## How to use it
 
-In Claude, copy the **first** line below, paste it in, and press Enter. Then do the same with the **second** line.
-
-```
-/plugin marketplace add https://github.com/constellation-academy/vibecode-agent-skills.git
-```
-
-```
-/plugin install vibecode-security@vibecode-agent-skills
-```
-
-Now close Claude and open it again. That's it — you don't need a GitHub account or any setup.
-
-> On the **desktop app** you can also do the second part with your mouse: click the **+** next to the text box → **Plugins** → **Add plugin**, then click **vibecode-security**.
-
----
-
-## Step 2 — Use it
+Good news: **there's nothing to install.** Your Constellation Academy account already has it.
 
 Open your project in Claude and type:
 
@@ -36,16 +20,11 @@ When Claude asks permission to run the check, click **Allow**. That's normal and
 
 ---
 
-## Step 3 — Keep it fresh (optional, but a good idea)
+## Don't see it?
 
-The security checks get better over time. To always get the newest ones, do this once:
+If typing **check my app** doesn't do anything, close Claude, open it again, and try once more. It updates itself quietly in the background.
 
-1. Type **/plugin** and press Enter
-2. Go to **Marketplaces**
-3. Pick **vibecode-agent-skills**
-4. Choose **Enable auto-update**
-
-Done. From now on it updates itself — you never have to think about it again.
+Still nothing? Message **Sascha** — something on the account side needs a look.
 
 ---
 
